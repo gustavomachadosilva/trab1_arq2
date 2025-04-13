@@ -1,0 +1,16 @@
+Comando para executar:
+
+sudo perf stat -e instructions,cycles,cache-references,cache-misses,L1-dcache-loads,L1-dcache-load-misses,dTLB-loads,dTLB-load-misses,l2_cache_hits_from_dc_misses,l2_cache_misses_from_dc_misses,l2_dtlb_misses,l2_itlb_misses,l2_pf_miss_l2_l3 ./app
+
+Evento	                        Descrição
+cycles	                        Número total de ciclos de clock
+instructions	                Número total de instruções executadas
+L1-dcache-loads	                Leitura de dados da cache L1D
+L1-dcache-load-misses	        Falhas de leitura na cache L1D
+l2_cache_hits_from_dc_misses	Hits na cache L2
+l2_cache_misses_from_dc_misses	Misses na cache L2
+dTLB-loads	                Acessos à TLB de dados
+dTLB-load-misses	        Misses na TLB de dados
+l2_dtlb_misses	                Misses de TLB que geraram acesso à L2
+l2_itlb_misses	                Misses de TLB de instrução (ITLB) que chegaram até L2
+l2_pf_miss_l2_l3                Pré-busca que falhou na L2 e L3 (quase certo que foi buscar na RAM)
