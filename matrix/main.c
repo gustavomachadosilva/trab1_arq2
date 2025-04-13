@@ -3,65 +3,70 @@
 #include <time.h>
 #include "matrix.h"
 
+#define MAX 3
 #define MAX_VALUE 100
 
-void generateRandomMatrix(int matrix[][MAX_COLUMN], int rowSize, int columnSize, int maxValue);
-void printMatrix(int matrix[][MAX_COLUMN], int rowSize, int columnSize);
-void printMatrix2(int matrix[][MAX_ROW], int rowSize, int columnSize);
+int* allocateMatrix(int size);
+void generateRandomMatrix(int* matrix, int size, int maxValue);
+void printMatrix(int* matrix, int size);
 
 int main(void) {
 
     srand(time(NULL));
 
-    int matrix[MAX_ROW][MAX_COLUMN];
-    int matrixDst[MAX_COLUMN][MAX_ROW];
+    int* matrix;
 
-    generateRandomMatrix(matrix, MAX_ROW, MAX_COLUMN, MAX_VALUE);
+    matrix = allocateMatrix(MAX);
 
-    printMatrix(matrix, MAX_ROW, MAX_COLUMN);
+    generateRandomMatrix(matrix, MAX, MAX_VALUE);
 
-    transposeMatrix(matrix, matrixDst, MAX_ROW, MAX_COLUMN);
+    printMatrix(matrix, MAX);
 
-    printMatrix2(matrixDst, MAX_COLUMN, MAX_ROW);
+    transposeMatrix(matrix, MAX);
+
+    printMatrix(matrix, MAX);
+
+    free(matrix);
+    matrix = NULL;
+
+    // printMatrix(matrix, MAX);
 
     return 0;
 }
 
-void generateRandomMatrix(int matrix[][MAX_COLUMN], int rowSize, int columnSize, int maxValue) {
+int* allocateMatrix(int size) {
+
+    int* matrix;
+
+    matrix = (int*) malloc(size * size * sizeof(int));
+
+    return matrix;
+
+}
+
+void generateRandomMatrix(int* matrix, int size, int maxValue) {
 
     int i, j;
+    int matrixIndex;
 
-    for (i=0; i<rowSize; i++) {
-        for (j=0; j<columnSize; j++) {
-            matrix[i][j] = rand() % maxValue;
+    for (i=0; i<size; i++) {
+        for (j=0; j<size; j++) {
+            matrixIndex = (i * size) + j;
+            matrix[matrixIndex] = rand() % maxValue;
         }
     }
 
 }
 
-void printMatrix(int matrix[][MAX_COLUMN], int rowSize, int columnSize) {
+void printMatrix(int* matrix, int size) {
 
     int i, j;
+    int matrixIndex;
 
-    for (i=0; i<rowSize; i++) {
-        for(j=0; j<columnSize; j++) {
-            printf("%d ", matrix[i][j]);
-        }
-
-        printf("\n");
-    }
-
-    printf("\n");
-
-}
-
-void printMatrix2(int matrix[][MAX_ROW], int rowSize, int columnSize) {
-
-    int i, j;
-
-    for (i=0; i<rowSize; i++) {
-        for(j=0; j<columnSize; j++) {
-            printf("%d ", matrix[i][j]);
+    for (i=0; i<size; i++) {
+        for(j=0; j<size; j++) {
+            matrixIndex = (i * size) + j;
+            printf("%d ", matrix[matrixIndex]);
         }
 
         printf("\n");
