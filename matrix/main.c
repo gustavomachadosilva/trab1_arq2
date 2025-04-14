@@ -3,8 +3,8 @@
 #include <time.h>
 #include "matrix.h"
 
-#define MAX 3
-#define MAX_VALUE 100
+#define MAX 4000
+#define MAX_VALUE 1000000
 
 int* allocateMatrix(int size);
 void generateRandomMatrix(int* matrix, int size, int maxValue);
@@ -20,11 +20,11 @@ int main(void) {
 
     generateRandomMatrix(matrix, MAX, MAX_VALUE);
 
-    printMatrix(matrix, MAX);
+    // printMatrix(matrix, MAX);
 
     transposeMatrix(matrix, MAX);
 
-    printMatrix(matrix, MAX);
+    // printMatrix(matrix, MAX);
 
     free(matrix);
     matrix = NULL;

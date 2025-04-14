@@ -3,8 +3,8 @@
 #include<time.h>
 #include"quickSort.h"
 
-#define MAX 20
-#define MAX_VALUE 20000
+#define MAX 10000000
+#define MAX_VALUE 1000000
 
 int* allocateArray(int size);
 int* freeArray(int* array);
@@ -25,9 +25,10 @@ int main(void) {
 
     quickSort(values, 0, MAX-1, MEDIAN_OF_THREE, HOARE, &recursionsCounter, &swapCounter);
 
-    printArray(values, MAX);
+    // printArray(values, MAX);
 
-    values = freeArray(values);
+    free(values);
+    values = NULL;
 
     // printArray(values, MAX);
 

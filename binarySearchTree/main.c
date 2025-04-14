@@ -6,45 +6,27 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "binarySearchTree.h"
 
+#define MAX 10000000
+#define MAX_VALUE 1000000
+
 int main(int argc, const char * argv[]) {
+
+    srand(time(NULL));
     
     Node *tree = createTree();
-    int wantedNode = 6;
-    int wantedNodeBalancingFactor;
-    
-    tree = insertTree(tree, 35);
-    tree = insertTree(tree, 2);
-    tree = insertTree(tree, 71);
-    tree = insertTree(tree, 1);
-    tree = insertTree(tree, 6);
-    tree = insertTree(tree, 49);
-    tree = insertTree(tree, 73);
-    tree = insertTree(tree, 28);
-    tree = insertTree(tree, 44);
-    tree = insertTree(tree, 50);
-    
-    preFixedLeft(tree);
-    
-    wantedNodeBalancingFactor = nodeBalancingFactor(tree, wantedNode);
-    
-    if (wantedNodeBalancingFactor != ERROR) {
-        printf("\nbalancing factor of node %d: %d\n", wantedNode, wantedNodeBalancingFactor);
+    int i;
+    int number;
+
+    for (i=0; i<MAX; i++) {
+
+        number = rand() % MAX_VALUE;
+
+        tree = insertTree(tree, number);
     }
-    else {
-        printf("The node %d is not presente in the tree!\n", wantedNode);
-    }
-    
-    printf("Is it an AVL tree? ");
-    if (isAvl(tree)) {
-        printf("True\n");
-    }
-    else {
-        printf("False\n");
-    }
-    
-    printf("Closest value of the node %d: %d\n", wantedNode, searchValue(tree, wantedNode));
     
     destroyTree(tree);
     
